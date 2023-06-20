@@ -66,13 +66,25 @@
             </ListView.ItemTemplate>
         </ListView>
         <!--Cart-->
-        <Border Grid.Row="3">
-            <VerticalStackLayout  Padding="10">
+        <Border Grid.Row="3" Padding="30,10">
+            <VerticalStackLayout HorizontalOptions="End" Spacing="5">
                 <Label Text="Basket Summary" FontSize="20" FontAttributes="Bold"></Label>
-                <HorizontalStackLayout Spacing="5">
+                <Grid ColumnDefinitions="70*,30*">
+                    <Label Text="Sub Total:"></Label>
+                    <Label Grid.Column="1" Text="{Binding SubTotal, StringFormat='{0:F2}'}" 
+                           FontAttributes="Bold" HorizontalOptions="End"></Label>
+                </Grid>
+                <Grid ColumnDefinitions="70*,30*">
+                    <Label Text="Vat:"></Label>
+                    <Label Grid.Column="1" Text="{Binding Vat, StringFormat='{0:F2}'}" 
+                           FontAttributes="Bold" HorizontalOptions="End"></Label>
+                </Grid>
+                <BoxView HeightRequest="2" WidthRequest="160"></BoxView>
+                <Grid ColumnDefinitions="70*,30*">
                     <Label Text="Total:"></Label>
-                    <Label Text="{Binding TotalPrice}" FontAttributes="Bold"></Label>
-                </HorizontalStackLayout>
+                    <Label Grid.Column="1" Text="{Binding TotalPrice, StringFormat='{0:F2}'}" 
+                           FontAttributes="Bold" HorizontalOptions="End"></Label>
+                </Grid>
             </VerticalStackLayout>
         </Border>
     </Grid>

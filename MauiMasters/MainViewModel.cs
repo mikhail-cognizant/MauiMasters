@@ -60,7 +60,7 @@ public partial class MainViewModel : ObservableObject
     {
         SelectedGroceryItem = groceryItem;
         groceryItem.Quantity++;
-        UpdateTotalPrice();
+        CalculatePrice();
     }
 
     [RelayCommand]
@@ -70,14 +70,21 @@ public partial class MainViewModel : ObservableObject
 
         if (groceryItem.Quantity == 0) return;       
         groceryItem.Quantity--;
-        UpdateTotalPrice();
+        CalculatePrice();
     }
 
-    private void UpdateTotalPrice()
-    {
-        TotalPrice = GroceryList.Sum(g => g.Price * g.Quantity);
+    private const decimal vatrate = .12M;
+    private void CalculatePrice()
+    {        
+        SubTotal = GroceryList.Sum(g => g.Price * g.Quantity);
+        Vat = SubTotal * vatrate;
+        TotalPrice = SubTotal + Vat;
     }
 
+    [ObservableProperty]
+    private decimal subTotal;
+    [ObservableProperty]
+    private decimal vat;
     [ObservableProperty]
     private decimal totalPrice;
 }
