@@ -1,16 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:local="clr-namespace:MauiMasters"
              x:Class="MauiMasters.MainPage"
-             x:DataType="local:MainViewModel">
+             x:DataType="local:MainViewModel"
+             x:Name="this">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:IsNotNullConverter x:Key="IsNotNullConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.BindingContext>
         <local:MainViewModel />
     </ContentPage.BindingContext>
     <Grid RowDefinitions="30*, 2, 50*, 20*">
         <!--Item Preview-->
         <Border>
-            <HorizontalStackLayout Padding="10" Spacing="10">
+            <HorizontalStackLayout Padding="10" Spacing="10" 
+                                   IsVisible="{Binding SelectedGroceryItem, Converter={StaticResource IsNotNullConverter}}">
                 <Image Source="{Binding SelectedGroceryItem.ImageUrl}" MaximumWidthRequest="150"></Image>
                 <VerticalStackLayout Spacing="5" VerticalOptions="Center">
                     <HorizontalStackLayout Spacing="5">
@@ -25,33 +33,44 @@
                         <Label Text="Price:" FontAttributes="Bold"></Label>
                         <Label Text="{Binding SelectedGroceryItem.Price}"></Label>
                     </HorizontalStackLayout>
-                    <Button Command="{Binding AddGroceryItemCommand}" CommandParameter="{Binding SelectedGroceryItem}"
-                        HeightRequest="50" WidthRequest="150" Text="Add to Basket"></Button>
                 </VerticalStackLayout>
             </HorizontalStackLayout>
         </Border>
         <!--Item List-->
-        <ScrollView Grid.Row="2" Padding="10">
-            <ListView ItemsSource="{Binding GroceryList}" SelectedItem="{Binding SelectedGroceryItem}">
-                <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="local:GroceryItem">
-                        <ImageCell ImageSource="{Binding ImageUrl}"
-                                   Text="{Binding Name}"
-                                   Detail="{Binding Description}" />
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </ScrollView>
+        <ListView Grid.Row="2" Margin="10" RowHeight="80"
+                  ItemsSource="{Binding GroceryList}" SelectedItem="{Binding SelectedGroceryItem, Mode=TwoWay}">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="local:GroceryItem">
+                    <ViewCell>
+                        <Grid ColumnDefinitions="65*,35*">
+                            <HorizontalStackLayout Spacing="5" VerticalOptions="Center">
+                                <Image Source="{Binding ImageUrl}" WidthRequest="50"></Image>
+                                <VerticalStackLayout>
+                                    <Label Text="{Binding Name}"></Label>
+                                    <Label Text="{Binding Description}"></Label>
+                                    <Label Text="{Binding Price}"></Label>
+                                </VerticalStackLayout>
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Grid.Column="1" Spacing="10" VerticalOptions="Center">
+                                <Button Text="-" HeightRequest="50" 
+                                        Command="{Binding Source={x:Reference this}, Path=BindingContext.DecrementQuantityCommand}" 
+                                        CommandParameter="{Binding}"></Button>
+                                <Label Text="{Binding Quantity}" FontAttributes="Bold" FontSize="20" Margin="0,10,0,0"></Label>
+                                <Button Text="+" HeightRequest="50"
+                                        Command="{Binding Source={x:Reference this}, Path=BindingContext.IncrementQuantityCommand}" 
+                                        CommandParameter="{Binding}"></Button>
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
         <!--Cart-->
         <Border Grid.Row="3">
             <VerticalStackLayout  Padding="10">
                 <Label Text="Basket Summary" FontSize="20" FontAttributes="Bold"></Label>
                 <HorizontalStackLayout Spacing="5">
-                    <Label Text="# of Items:"></Label>
-                    <Label Text="{Binding BasketCount}" FontAttributes="Bold"></Label>    
-                </HorizontalStackLayout>
-                <HorizontalStackLayout Spacing="5">
-                    <Label Text="Total Price:"></Label>
+                    <Label Text="Total:"></Label>
                     <Label Text="{Binding TotalPrice}" FontAttributes="Bold"></Label>
                 </HorizontalStackLayout>
             </VerticalStackLayout>

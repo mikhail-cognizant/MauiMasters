@@ -6,7 +6,7 @@ namespace MauiMasters;
 
 public partial class MainViewModel : ObservableObject
 {
-    public IEnumerable<GroceryItem> GroceryList { get; set; } = new[]
+    public ObservableCollection<GroceryItem> GroceryList { get; set; } = new ObservableCollection<GroceryItem>
     {
         new GroceryItem
         { 
@@ -53,21 +53,31 @@ public partial class MainViewModel : ObservableObject
     };
 
     [ObservableProperty]
-    private GroceryItem selectedGroceryItem;
+    private GroceryItem? selectedGroceryItem;
 
-
-    public ObservableCollection<GroceryItem> GroceryBasket { get; set; } = new();
     [RelayCommand]
-    private void AddGroceryItem(GroceryItem groceryItem)
+    private void IncrementQuantity(GroceryItem groceryItem)
     {
-        GroceryBasket.Add(groceryItem);
+        SelectedGroceryItem = groceryItem;
+        groceryItem.Quantity++;
+        UpdateTotalPrice();
+    }
 
-        BasketCount = GroceryBasket.Count();
-        TotalPrice = GroceryBasket.Sum(g => g.Price);
+    [RelayCommand]
+    private void DecrementQuantity(GroceryItem groceryItem)
+    {
+        SelectedGroceryItem = groceryItem;
+
+        if (groceryItem.Quantity == 0) return;       
+        groceryItem.Quantity--;
+        UpdateTotalPrice();
+    }
+
+    private void UpdateTotalPrice()
+    {
+        TotalPrice = GroceryList.Sum(g => g.Price * g.Quantity);
     }
 
     [ObservableProperty]
     private decimal totalPrice;
-    [ObservableProperty]
-    private int basketCount;
 }
