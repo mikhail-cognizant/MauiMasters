@@ -1,41 +1,60 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MauiMasters.MainPage">
-
-    <ScrollView>
-        <VerticalStackLayout
-            Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
-
-            <Image
-                Source="dotnet_bot.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="200"
-                HorizontalOptions="Center" />
-
-            <Label
-                Text="Hello, World!"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
-                HorizontalOptions="Center" />
-
-            <Label
-                Text="Welcome to .NET Multi-platform App UI"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-                FontSize="18"
-                HorizontalOptions="Center" />
-
-            <Button
-                x:Name="CounterBtn"
-                Text="Click me"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />
-
-        </VerticalStackLayout>
-    </ScrollView>
-
+             xmlns:local="clr-namespace:MauiMasters"
+             x:Class="MauiMasters.MainPage"
+             x:DataType="local:MainViewModel">
+    <ContentPage.BindingContext>
+        <local:MainViewModel />
+    </ContentPage.BindingContext>
+    <Grid RowDefinitions="30*, 2, 50*, 20*">
+        <!--Item Preview-->
+        <Border>
+            <HorizontalStackLayout Padding="10" Spacing="10">
+                <Image Source="{Binding SelectedGroceryItem.ImageUrl}" MaximumWidthRequest="150"></Image>
+                <VerticalStackLayout Spacing="5" VerticalOptions="Center">
+                    <HorizontalStackLayout Spacing="5">
+                        <Label Text="Name:" FontAttributes="Bold"></Label>
+                        <Label Text="{Binding SelectedGroceryItem.Name}"></Label>    
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="5">
+                        <Label Text="Description:" FontAttributes="Bold"></Label>
+                        <Label Text="{Binding SelectedGroceryItem.Description}"></Label>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="5">
+                        <Label Text="Price:" FontAttributes="Bold"></Label>
+                        <Label Text="{Binding SelectedGroceryItem.Price}"></Label>
+                    </HorizontalStackLayout>
+                    <Button Command="{Binding AddGroceryItemCommand}" CommandParameter="{Binding SelectedGroceryItem}"
+                        HeightRequest="50" WidthRequest="150" Text="Add to Basket"></Button>
+                </VerticalStackLayout>
+            </HorizontalStackLayout>
+        </Border>
+        <!--Item List-->
+        <ScrollView Grid.Row="2" Padding="10">
+            <ListView ItemsSource="{Binding GroceryList}" SelectedItem="{Binding SelectedGroceryItem}">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="local:GroceryItem">
+                        <ImageCell ImageSource="{Binding ImageUrl}"
+                                   Text="{Binding Name}"
+                                   Detail="{Binding Description}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ScrollView>
+        <!--Cart-->
+        <Border Grid.Row="3">
+            <VerticalStackLayout  Padding="10">
+                <Label Text="Basket Summary" FontSize="20" FontAttributes="Bold"></Label>
+                <HorizontalStackLayout Spacing="5">
+                    <Label Text="# of Items:"></Label>
+                    <Label Text="{Binding BasketCount}" FontAttributes="Bold"></Label>    
+                </HorizontalStackLayout>
+                <HorizontalStackLayout Spacing="5">
+                    <Label Text="Total Price:"></Label>
+                    <Label Text="{Binding TotalPrice}" FontAttributes="Bold"></Label>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </Border>
+    </Grid>
 </ContentPage>

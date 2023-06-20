@@ -49,6 +49,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\apple.jpg" />
+	  <None Remove="Resources\Images\banana.jpg" />
+	  <None Remove="Resources\Images\grapes.jpg" />
+	  <None Remove="Resources\Images\melon.jpg" />
+	  <None Remove="Resources\Images\orange.jpg" />
+	  <None Remove="Resources\Images\strawberry.jpg" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 	</ItemGroup>
 
