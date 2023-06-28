@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31611.283
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MauiMasters", "MauiMasters\MauiMasters.csproj", "{D0916FE8-3634-4CA5-9177-A9EEF25E9C70}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GroceryCartAPI", "GroceryCartAPI\GroceryCartAPI.csproj", "{BDFE7B9D-12E7-4D9C-B8FE-B33705BB80E5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,6 +19,10 @@ Global
 		{D0916FE8-3634-4CA5-9177-A9EEF25E9C70}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D0916FE8-3634-4CA5-9177-A9EEF25E9C70}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D0916FE8-3634-4CA5-9177-A9EEF25E9C70}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{BDFE7B9D-12E7-4D9C-B8FE-B33705BB80E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDFE7B9D-12E7-4D9C-B8FE-B33705BB80E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDFE7B9D-12E7-4D9C-B8FE-B33705BB80E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDFE7B9D-12E7-4D9C-B8FE-B33705BB80E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
