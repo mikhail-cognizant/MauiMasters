@@ -34,9 +34,9 @@ public class GroceryController : Controller
         _service.RemoveGroceryItems(products);
     }
 
-    //[HttpPost("AddProducts")]
-    //public IEnumerable<GroceryItem> AddProducts([FromBody] IEnumerable<int> productIds)
-    //{
-    //    return _service.GetProductsById(productIds);
-    //}
+    [HttpPost("CalculateTotalPrice")]
+    public CartTotals GetCartTotal([FromBody]IEnumerable<GroceryItem> groceryList)
+    {
+        return _service.CalculateTotalPrice(groceryList);
+    }
 }

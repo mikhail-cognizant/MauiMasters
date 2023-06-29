@@ -7,5 +7,5 @@ public interface IGroceryCartService
     GroceryItem GetProductById(int productId);
     void AddGroceryItems(IEnumerable<GroceryItem> groceries);
     void RemoveGroceryItems(IEnumerable<GroceryItem> groceries);
-    //decimal CalculateTotalPrice();
+    CartTotals CalculateTotalPrice(IEnumerable<GroceryItem> groceryList);
 }
