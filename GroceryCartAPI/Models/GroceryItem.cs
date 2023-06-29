@@ -1,9 +1,9 @@
-﻿namespace GroceryCartAPI.Models
-{
-    public class GroceryItem
-    {
-        public string? ItemName { get; set; }
+﻿namespace GroceryCartAPI.Models;
 
-        public int? Price { get; set; }
-    }
+public class GroceryItem
+{
+    public int Id { get; set; }
+    public string? ItemName { get; set; }
+    public int? Price { get; set; }
+    //public int? Quantity { get; set; }
 }
