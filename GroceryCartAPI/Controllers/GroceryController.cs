@@ -1,4 +1,5 @@
-﻿using GroceryCartAPI.Models;
+﻿using Common;
+using GroceryCartAPI.Models;
 using GroceryCartAPI.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,10 +17,16 @@ public class GroceryController : Controller
         _service = service;
     }
 
-    [HttpGet(Name = "GetProductById")]
-    public GroceryItem GetProductById(int productId)
+    [HttpGet(Name = "GetAllProducts")]
+    public IEnumerable<GroceryItemDto> GetAllProducts()
     {
-        return _service.GetProductById(productId);
+        return _service.GetAllProducts().Select(p => p.ToDto());
+    }
+
+    [HttpGet("{productId}")]
+    public GroceryItemDto GetProductById(int productId)
+    {
+        return _service.GetProductById(productId).ToDto();
     }
 
     [HttpPost(Name = "Add Products")]

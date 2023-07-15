@@ -4,7 +4,7 @@ namespace GroceryCartAPI.Services;
 
 public class GroceryCartService : IGroceryCartService
 {
-    private static List<GroceryItem>? groceryItems;
+    private static List<GroceryItem> groceryItems = new();
     private static decimal taxRate = .12M;
 
     public GroceryCartService()
@@ -14,7 +14,7 @@ public class GroceryCartService : IGroceryCartService
 
     private void InitializeList()
     {
-        if (groceryItems == null)
+        if (!groceryItems.Any())
         {
             groceryItems = new List<GroceryItem>()
             {
@@ -202,6 +202,11 @@ public class GroceryCartService : IGroceryCartService
         }
     }
 
+    public IEnumerable<GroceryItem> GetAllProducts()
+    {
+        return groceryItems;
+    }
+
     public GroceryItem GetProductById(int productId)
     {
         var groceryItem = groceryItems!.FirstOrDefault(g => g.Id == productId);
@@ -213,7 +218,7 @@ public class GroceryCartService : IGroceryCartService
 
     public void AddGroceryItems(IEnumerable<GroceryItem> groceries)
     {
-        groceryItems!.AddRange(groceries); 
+        groceryItems!.AddRange(groceries);
     }
 
     public void RemoveGroceryItems(IEnumerable<GroceryItem> groceries)
@@ -230,7 +235,7 @@ public class GroceryCartService : IGroceryCartService
 
     public CartTotals CalculateTotalPrice(IEnumerable<GroceryItem> groceryList)
     {
-        var cartTotal = new CartTotals(); 
+        var cartTotal = new CartTotals();
         var groceryItemQuantities = groceryList.GroupBy(g => g.Id)
             .ToDictionary(key => key.Key, value => value.Count());
 
@@ -244,7 +249,7 @@ public class GroceryCartService : IGroceryCartService
                 BasePrice = basePrice,
                 Tax = basePrice * taxRate
             };
-        } );
+        });
         cartTotal.Items.AddRange(cartLineItems);
 
         return cartTotal;
