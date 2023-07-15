@@ -6,7 +6,21 @@
              x:Class="MauiMasters.MainPage"
              x:DataType="local:MainViewModel"
              x:Name="this">
-    <ContentPage.Resources>
+    <VerticalStackLayout VerticalOptions="Center" Spacing="10">
+        <Image
+                Source="dotnet_bot.png"
+                SemanticProperties.Description="Landing Page Icon"
+                HeightRequest="200"
+                HorizontalOptions="Center"/>
+        <Label
+                Text="Welcome to the Final Project!"
+                FontSize="20"
+                HorizontalOptions="Center" />
+        <Button Text="Go to Grocery List"
+                Clicked="Button_Clicked"
+                WidthRequest="150"></Button>
+    </VerticalStackLayout>
+    <!--<ContentPage.Resources>
         <ResourceDictionary>
             <toolkit:IsNotNullConverter x:Key="IsNotNullConverter" />
         </ResourceDictionary>
@@ -15,7 +29,7 @@
         <local:MainViewModel />
     </ContentPage.BindingContext>
     <Grid RowDefinitions="30*, 2, 50*, 20*">
-        <!--Item Preview-->
+        --><!--Item Preview--><!--
         <Border>
             <HorizontalStackLayout Padding="10" Spacing="10" 
                                    IsVisible="{Binding SelectedGroceryItem, Converter={StaticResource IsNotNullConverter}}">
@@ -36,7 +50,7 @@
                 </VerticalStackLayout>
             </HorizontalStackLayout>
         </Border>
-        <!--Item List-->
+        --><!--Item List--><!--
         <ListView Grid.Row="2" Margin="10" RowHeight="80"
                   ItemsSource="{Binding GroceryList}" SelectedItem="{Binding SelectedGroceryItem, Mode=TwoWay}">
             <ListView.ItemTemplate>
@@ -65,7 +79,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <!--Cart-->
+        --><!--Cart--><!--
         <Border Grid.Row="3" Padding="30,10">
             <VerticalStackLayout HorizontalOptions="End" Spacing="5">
                 <Label Text="Basket Summary" FontSize="20" FontAttributes="Bold"></Label>
@@ -87,5 +101,5 @@
                 </Grid>
             </VerticalStackLayout>
         </Border>
-    </Grid>
+    </Grid>-->
 </ContentPage>
