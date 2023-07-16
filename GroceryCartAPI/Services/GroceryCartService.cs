@@ -1,4 +1,5 @@
-﻿using GroceryCartAPI.Models;
+﻿using Common;
+using GroceryCartAPI.Models;
 
 namespace GroceryCartAPI.Services;
 
@@ -270,19 +271,19 @@ public class GroceryCartService : IGroceryCartService
         }
     }
 
-    public CartTotals CalculateTotalPrice(IEnumerable<GroceryItem> groceryList)
+    public CartTotals CalculateTotalPrice()
     {
         var cartTotal = new CartTotals();
-        var groceryItemQuantities = groceryList.GroupBy(g => g.Id)
-            .ToDictionary(key => key.Key, value => value.Count());
+        //var groceryItemQuantities = groceryCart.GroupBy(g => g.Id)
+        //    .ToDictionary(key => key.Key, value => value.Count());
 
-        var cartLineItems = groceryList.DistinctBy(g => g.Id).Select(g =>
+        var cartLineItems = groceryCart.Select(g =>
         {
             var basePrice = g.Price;
-            return new CartLinetem
+            return new CartLineItem
             {
-                GroceryItem = g,
-                Quantity = groceryItemQuantities[g.Id],
+                GroceryItem = g.ToDto(),
+                Quantity = g.Quantity,
                 BasePrice = basePrice,
                 Tax = basePrice * taxRate
             };

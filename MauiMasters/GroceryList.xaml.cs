@@ -4,7 +4,6 @@ public partial class GroceryList : ContentPage
 {
 	private readonly GroceryListViewModel _vm;
 
-
     public GroceryList(GroceryListViewModel vm)
 	{
 		InitializeComponent();
@@ -16,4 +15,9 @@ public partial class GroceryList : ContentPage
 	{
 		await _vm.Initialize();
 	}
+
+    private async void Button_Clicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("//CartSummary");
+    }
 }

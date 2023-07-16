@@ -16,4 +16,9 @@
         ContentTemplate="{DataTemplate local:GroceryList}"
         Route="GroceryList"/>
 
+    <ShellContent
+        Title="Checkout Cart"
+        ContentTemplate="{DataTemplate local:CheckoutCart}"
+        Route="CartSummary"/>
+
 </Shell>

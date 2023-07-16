@@ -1,5 +1,3 @@
-using AndroidX.CardView.Widget;
-
 namespace MauiMasters.Controls;
 
 public partial class GroceryItemView : ContentView

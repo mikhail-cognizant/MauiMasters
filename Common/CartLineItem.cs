@@ -1,8 +1,8 @@
-﻿namespace GroceryCartAPI.Models;
+﻿namespace Common;
 
-public class CartLinetem
+public class CartLineItem
 {
-    public GroceryItem? GroceryItem { get; set; }
+    public GroceryItemDto? GroceryItem { get; set; }
     public int Quantity { get; set; }
     public decimal BasePrice { get; set; }
     public decimal Tax { get; set; }

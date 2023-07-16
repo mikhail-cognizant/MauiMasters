@@ -40,9 +40,10 @@ public class GroceryCartController : Controller
         _service.RemoveGroceryItems(products.Select(p => GroceryItem.FromDto(p)));
     }
 
-    [HttpPost("CalculateTotalPrice")]
-    public CartTotals GetCartTotal([FromBody]IEnumerable<GroceryItemDto> groceryList)
+    [HttpGet()]
+    [Route("carttotal")]
+    public CartTotals GetCartTotal()
     {
-        return _service.CalculateTotalPrice(groceryList.Select(p => GroceryItem.FromDto(p)));
+        return _service.CalculateTotalPrice();
     }
 }

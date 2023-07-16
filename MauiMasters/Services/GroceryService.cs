@@ -62,4 +62,20 @@ public class GroceryService : IGroceryService
 
         return response.IsSuccessStatusCode;
     }
+
+    public async Task<CartTotals> GetCartTotal()
+    {
+        CartTotals total = new CartTotals();
+
+        Uri uri = new Uri(groceryRoute + "/carttotal");
+
+        HttpResponseMessage response = await client.GetAsync(uri);
+        if (response.IsSuccessStatusCode)
+        {
+            string content = await response.Content.ReadAsStringAsync();
+            total = JsonSerializer.Deserialize<CartTotals>(content, serializerOptions);
+        }
+
+        return total;
+    }
 }

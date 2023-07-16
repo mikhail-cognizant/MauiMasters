@@ -13,14 +13,13 @@
             <toolkit:IsNotNullConverter x:Key="IsNotNullConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
-    <Grid RowDefinitions="30*, 2, 70*">
+    <Grid RowDefinitions="30*, 2, 70*, 70">
         
-    <!--Item Preview-->
-    
+        <!--Item Preview-->
         <Border>
             <VerticalStackLayout Spacing="10" IsVisible="{Binding SelectedGroceryItem, Converter={StaticResource IsNotNullConverter}}">
                 <HorizontalStackLayout Padding="10" Spacing="10" 
-                                   MinimumHeightRequest="150" MaximumHeightRequest="150">
+                                   MinimumHeightRequest="130" MaximumHeightRequest="130">
                     <Image Source="{Binding SelectedGroceryItem.ImageUrl}" MinimumWidthRequest="150" MaximumWidthRequest="150"></Image>
                     <VerticalStackLayout Spacing="5" VerticalOptions="Center">
                         <HorizontalStackLayout Spacing="5">
@@ -52,8 +51,7 @@
             </VerticalStackLayout>
         </Border>
         
-    <!--Item List-->
-
+        <!--Item List-->
         <ListView Grid.Row="2" Margin="10" RowHeight="80"
                 ItemsSource="{Binding GroceryList}" SelectedItem="{Binding SelectedGroceryItem, Mode=TwoWay}">
             <ListView.ItemTemplate>
@@ -66,27 +64,10 @@
         </ListView>
 
         <!--Cart-->
-
-        <!--<Border Grid.Row="3" Padding="30,10">
-            <VerticalStackLayout HorizontalOptions="End" Spacing="5">
-                <Label Text="Basket Summary" FontSize="20" FontAttributes="Bold"></Label>
-                <Grid ColumnDefinitions="70*,30*">
-                    <Label Text="Sub Total:"></Label>
-                    <Label Grid.Column="1" Text="{Binding SubTotal, StringFormat='{0:F2}'}" 
-                           FontAttributes="Bold" HorizontalOptions="End"></Label>
-                </Grid>
-                <Grid ColumnDefinitions="70*,30*">
-                    <Label Text="Vat:"></Label>
-                    <Label Grid.Column="1" Text="{Binding Vat, StringFormat='{0:F2}'}" 
-                           FontAttributes="Bold" HorizontalOptions="End"></Label>
-                </Grid>
-                <BoxView HeightRequest="2" WidthRequest="160"></BoxView>
-                <Grid ColumnDefinitions="70*,30*">
-                    <Label Text="Total:"></Label>
-                    <Label Grid.Column="1" Text="{Binding TotalPrice, StringFormat='{0:F2}'}" 
-                           FontAttributes="Bold" HorizontalOptions="End"></Label>
-                </Grid>
+        <Border Grid.Row="3">
+            <VerticalStackLayout  HorizontalOptions="Center" VerticalOptions="Center">
+                <Button Text="Checkout Cart" WidthRequest="150" Clicked="Button_Clicked"></Button>
             </VerticalStackLayout>
-        </Border>-->
+        </Border>
     </Grid>
 </ContentPage>
