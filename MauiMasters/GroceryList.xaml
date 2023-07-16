@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:local="clr-namespace:MauiMasters"
+             x:DataType="local:GroceryListViewModel"
+             x:Class="MauiMasters.GroceryList"
+             x:Name="this"
+             Title="Grocery List">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:IsNotNullConverter x:Key="IsNotNullConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid RowDefinitions="30*, 2, 50*, 20*">
+        
+    <!--Item Preview-->
+    
+        <Border>
+            <HorizontalStackLayout Padding="10" Spacing="10" 
+                                   IsVisible="{Binding SelectedGroceryItem, Converter={StaticResource IsNotNullConverter}}">
+                <Image Source="{Binding SelectedGroceryItem.ImageUrl}" MaximumWidthRequest="150"></Image>
+                <VerticalStackLayout Spacing="5" VerticalOptions="Center">
+                    <HorizontalStackLayout Spacing="5">
+                        <Label Text="Name:" FontAttributes="Bold"></Label>
+                        <Label Text="{Binding SelectedGroceryItem.Name}"></Label>    
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="5">
+                        <Label Text="Description:" FontAttributes="Bold"></Label>
+                        <Label Text="{Binding SelectedGroceryItem.Description}"></Label>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Spacing="5">
+                        <Label Text="Price:" FontAttributes="Bold"></Label>
+                        <Label Text="{Binding SelectedGroceryItem.Price}"></Label>
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </HorizontalStackLayout>
+        </Border>
+        
+    <!--Item List-->
+    
+        <ListView Grid.Row="2" Margin="10" RowHeight="80"
+                  ItemsSource="{Binding GroceryList}" SelectedItem="{Binding SelectedGroceryItem, Mode=TwoWay}">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="local:GroceryItem">
+                    <ViewCell>
+                        <Grid ColumnDefinitions="65*,35*">
+                            <HorizontalStackLayout Spacing="5" VerticalOptions="Center">
+                                <Image Source="{Binding ImageUrl}" WidthRequest="50"></Image>
+                                <VerticalStackLayout>
+                                    <Label Text="{Binding Name}"></Label>
+                                    <Label Text="{Binding Description}"></Label>
+                                    <Label Text="{Binding Price}"></Label>
+                                </VerticalStackLayout>
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Grid.Column="1" Spacing="10" VerticalOptions="Center">
+                                <Button Text="-" HeightRequest="50" 
+                                        Command="{Binding Source={x:Reference this}, Path=BindingContext.DecrementQuantityCommand}" 
+                                        CommandParameter="{Binding}"></Button>
+                                <Label Text="{Binding Quantity}" FontAttributes="Bold" FontSize="20" Margin="0,10,0,0"></Label>
+                                <Button Text="+" HeightRequest="50"
+                                        Command="{Binding Source={x:Reference this}, Path=BindingContext.IncrementQuantityCommand}" 
+                                        CommandParameter="{Binding}"></Button>
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
+    <!--Cart-->
+    
+        <Border Grid.Row="3" Padding="30,10">
+            <VerticalStackLayout HorizontalOptions="End" Spacing="5">
+                <Label Text="Basket Summary" FontSize="20" FontAttributes="Bold"></Label>
+                <Grid ColumnDefinitions="70*,30*">
+                    <Label Text="Sub Total:"></Label>
+                    <Label Grid.Column="1" Text="{Binding SubTotal, StringFormat='{0:F2}'}" 
+                           FontAttributes="Bold" HorizontalOptions="End"></Label>
+                </Grid>
+                <Grid ColumnDefinitions="70*,30*">
+                    <Label Text="Vat:"></Label>
+                    <Label Grid.Column="1" Text="{Binding Vat, StringFormat='{0:F2}'}" 
+                           FontAttributes="Bold" HorizontalOptions="End"></Label>
+                </Grid>
+                <BoxView HeightRequest="2" WidthRequest="160"></BoxView>
+                <Grid ColumnDefinitions="70*,30*">
+                    <Label Text="Total:"></Label>
+                    <Label Grid.Column="1" Text="{Binding TotalPrice, StringFormat='{0:F2}'}" 
+                           FontAttributes="Bold" HorizontalOptions="End"></Label>
+                </Grid>
+            </VerticalStackLayout>
+        </Border>
+    </Grid>
+</ContentPage>

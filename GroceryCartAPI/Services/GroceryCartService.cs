@@ -18,184 +18,220 @@ public class GroceryCartService : IGroceryCartService
         {
             groceryItems = new List<GroceryItem>()
             {
-                new GroceryItem()
+                new GroceryItem
                 {
                     Id = 1,
-                    ItemName = "Banana",
-                    Price = 15
+                    Name = "Apple",
+                    Description = "A is for Apple",
+                    Price = 12.50M,
+                    ImageUrl = "apple.jpg"
                 },
-                new GroceryItem()
+                new GroceryItem
                 {
                     Id = 2,
-                    ItemName = "Pear",
-                    Price = 50
+                    Name = "Banana",
+                    Description = "B is for Banana",
+                    Price = 7.15M,
+                    ImageUrl = "banana.jpg"
                 },
-                new GroceryItem()
+                new GroceryItem
                 {
                     Id = 3,
-                    ItemName = "Apple",
-                    Price = 35
+                    Name = "Orange",
+                    Description = "O is for Orange",
+                    Price = 13.70M,
+                    ImageUrl = "orange.jpg"
                 },
-                new GroceryItem()
+                new GroceryItem
                 {
                     Id = 4,
-                    ItemName = "Watermelon",
-                    Price = 7
+                    Name = "Grapes",
+                    Description = "G is for Grapes",
+                    Price = 20.10M,
+                    ImageUrl = "grapes.jpg"
                 },
-                new GroceryItem()
+                new GroceryItem
                 {
                     Id = 5,
-                    ItemName = "Orange",
-                    Price = 3
+                    Name = "Strawberry",
+                    Description = "S is for Strawberry",
+                    Price = 4.20M,
+                    ImageUrl = "strawberry.jpg"
                 },
-                new GroceryItem()
+                new GroceryItem
                 {
                     Id = 6,
-                    ItemName = "Grapes",
-                    Price = 8
+                    Name = "Melon",
+                    Description = "M is for Melon",
+                    Price = 20.30M,
+                    ImageUrl = "melon.jpg"
                 },
                 new GroceryItem()
                 {
                     Id = 7,
-                    ItemName = "Cherry",
-                    Price = 7
+                    Name = "Pear",
+                    Price = 50
                 },
                 new GroceryItem()
                 {
                     Id = 8,
-                    ItemName = "Peach",
-                    Price = 3
+                    Name = "Watermelon",
+                    Price = 7
                 },
                 new GroceryItem()
                 {
                     Id = 9,
-                    ItemName = "Strawberry",
-                    Price = 23
+                    Name = "Orange",
+                    Price = 3
                 },
                 new GroceryItem()
                 {
                     Id = 10,
-                    ItemName = "Plum",
-                    Price = 35
-                },
-                new GroceryItem()
-                {
-                    Id = 11,
-                    ItemName = "Fig",
-                    Price = 15
-                },
-                new GroceryItem()
-                {
-                    Id = 12,
-                    ItemName = "Kiwi",
-                    Price = 26
-                },
-                new GroceryItem()
-                {
-                    Id = 13,
-                    ItemName = "Pineapple",
-                    Price = 35
-                },
-                new GroceryItem()
-                {
-                    Id = 14,
-                    ItemName = "Papaya",
-                    Price = 7
-                },
-                new GroceryItem()
-                {
-                    Id = 15,
-                    ItemName = "Avocado",
-                    Price = 9
-                },
-                new GroceryItem()
-                {
-                    Id = 16,
-                    ItemName = "Apricot",
+                    Name = "Grapes",
                     Price = 8
                 },
                 new GroceryItem()
                 {
-                    Id = 17,
-                    ItemName = "Dragon fruit",
+                    Id = 11,
+                    Name = "Cherry",
                     Price = 7
                 },
                 new GroceryItem()
                 {
-                    Id = 18,
-                    ItemName = "Carambola",
+                    Id = 12,
+                    Name = "Peach",
                     Price = 3
                 },
                 new GroceryItem()
                 {
-                    Id = 19,
-                    ItemName = "Mango",
-                    Price = 13
-                },
-                new GroceryItem()
-                {
-                    Id = 20,
-                    ItemName = "Grapefruit",
-                    Price = 14
-                },
-                new GroceryItem()
-                {
-                    Id = 21,
-                    ItemName = "Lemon",
-                    Price = 15
-                },
-                new GroceryItem()
-                {
-                    Id = 22,
-                    ItemName = "Raspberry",
-                    Price = 6
-                },
-                new GroceryItem()
-                {
-                    Id = 23,
-                    ItemName = "Pomegranate",
+                    Id = 13,
+                    Name = "Strawberry",
                     Price = 23
                 },
                 new GroceryItem()
                 {
-                    Id = 24,
-                    ItemName = "Guava",
+                    Id = 14,
+                    Name = "Plum",
+                    Price = 35
+                },
+                new GroceryItem()
+                {
+                    Id = 15,
+                    Name = "Fig",
+                    Price = 15
+                },
+                new GroceryItem()
+                {
+                    Id = 16,
+                    Name = "Kiwi",
+                    Price = 26
+                },
+                new GroceryItem()
+                {
+                    Id = 17,
+                    Name = "Pineapple",
+                    Price = 35
+                },
+                new GroceryItem()
+                {
+                    Id = 18,
+                    Name = "Papaya",
                     Price = 7
+                },
+                new GroceryItem()
+                {
+                    Id = 19,
+                    Name = "Avocado",
+                    Price = 9
+                },
+                new GroceryItem()
+                {
+                    Id = 20,
+                    Name = "Apricot",
+                    Price = 8
+                },
+                new GroceryItem()
+                {
+                    Id = 21,
+                    Name = "Dragon fruit",
+                    Price = 7
+                },
+                new GroceryItem()
+                {
+                    Id = 22,
+                    Name = "Carambola",
+                    Price = 3
+                },
+                new GroceryItem()
+                {
+                    Id = 23,
+                    Name = "Mango",
+                    Price = 13
+                },
+                new GroceryItem()
+                {
+                    Id = 24,
+                    Name = "Grapefruit",
+                    Price = 14
                 },
                 new GroceryItem()
                 {
                     Id = 25,
-                    ItemName = "Jackfruit",
-                    Price = 3
+                    Name = "Lemon",
+                    Price = 15
                 },
                 new GroceryItem()
                 {
                     Id = 26,
-                    ItemName = "Durian",
-                    Price = 5
+                    Name = "Raspberry",
+                    Price = 6
                 },
                 new GroceryItem()
                 {
                     Id = 27,
-                    ItemName = "Lanzones",
-                    Price = 7
+                    Name = "Pomegranate",
+                    Price = 23
                 },
                 new GroceryItem()
                 {
                     Id = 28,
-                    ItemName = "Coconut",
-                    Price = 3
+                    Name = "Guava",
+                    Price = 7
                 },
                 new GroceryItem()
                 {
                     Id = 29,
-                    ItemName = "Blueberry",
-                    Price = 16
+                    Name = "Jackfruit",
+                    Price = 3
                 },
                 new GroceryItem()
                 {
                     Id = 30,
-                    ItemName = "Rambutan",
+                    Name = "Durian",
+                    Price = 5
+                },
+                new GroceryItem()
+                {
+                    Id = 31,
+                    Name = "Lanzones",
+                    Price = 7
+                },
+                new GroceryItem()
+                {
+                    Id = 32,
+                    Name = "Coconut",
+                    Price = 3
+                },
+                new GroceryItem()
+                {
+                    Id = 33,
+                    Name = "Blueberry",
+                    Price = 16
+                },
+                new GroceryItem()
+                {
+                    Id = 34,
+                    Name = "Rambutan",
                     Price = 12
                 }
             };
@@ -241,7 +277,7 @@ public class GroceryCartService : IGroceryCartService
 
         var cartLineItems = groceryList.DistinctBy(g => g.Id).Select(g =>
         {
-            var basePrice = g.Price is not null ? g.Price.Value : 0;
+            var basePrice = g.Price;
             return new CartLinetem
             {
                 GroceryItem = g,

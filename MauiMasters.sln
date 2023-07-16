@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MauiMasters", "MauiMasters\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GroceryCartAPI", "GroceryCartAPI\GroceryCartAPI.csproj", "{BDFE7B9D-12E7-4D9C-B8FE-B33705BB80E5}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{EA011B6A-417F-47D5-A696-5F0CA8A89E95}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{BDFE7B9D-12E7-4D9C-B8FE-B33705BB80E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BDFE7B9D-12E7-4D9C-B8FE-B33705BB80E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BDFE7B9D-12E7-4D9C-B8FE-B33705BB80E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA011B6A-417F-47D5-A696-5F0CA8A89E95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA011B6A-417F-47D5-A696-5F0CA8A89E95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA011B6A-417F-47D5-A696-5F0CA8A89E95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA011B6A-417F-47D5-A696-5F0CA8A89E95}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

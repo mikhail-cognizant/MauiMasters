@@ -17,27 +17,27 @@ namespace GroceryCartAPI.Controllers
 
         private void InitializeList()
         {
-            if (groceryItems == null) 
-            {
-                groceryItems = new List<GroceryItem>()
-                {
-                    new GroceryItem()
-                    {
-                        ItemName = "Banana",
-                        Price = 15
-                    },
-                    new GroceryItem()
-                    {
-                        ItemName = "Pear",
-                        Price = 50
-                    },
-                    new GroceryItem()
-                    {
-                        ItemName = "Apple",
-                        Price = 35
-                    }
-                };
-            }
+            //if (groceryItems == null) 
+            //{
+            //    groceryItems = new List<GroceryItem>()
+            //    {
+            //        new GroceryItem()
+            //        {
+            //            ItemName = "Banana",
+            //            Price = 15
+            //        },
+            //        new GroceryItem()
+            //        {
+            //            ItemName = "Pear",
+            //            Price = 50
+            //        },
+            //        new GroceryItem()
+            //        {
+            //            ItemName = "Apple",
+            //            Price = 35
+            //        }
+            //    };
+            //}
         }
 
         //[HttpGet(Name = "GetAvailableProducts")]
@@ -54,7 +54,7 @@ namespace GroceryCartAPI.Controllers
                 throw new KeyNotFoundException("Product not found");
             }
 
-            var existingItem = groceryItems.FirstOrDefault(x => x.ItemName == itemName);
+            var existingItem = groceryItems.FirstOrDefault(x => x.Name == itemName);
 
             if (existingItem != null) 
             {
@@ -74,7 +74,7 @@ namespace GroceryCartAPI.Controllers
                 groceryItems = new List<GroceryItem>();
             }
 
-            if (groceryItems.Any(x => x?.ItemName?.ToUpper() == groceryItem?.ItemName?.ToUpper()))
+            if (groceryItems.Any(x => x?.Name?.ToUpper() == groceryItem?.Name?.ToUpper()))
             {
                 throw new BadHttpRequestException("Item already exists");
             }
@@ -90,28 +90,28 @@ namespace GroceryCartAPI.Controllers
                 throw new Exception("no available products");
             }
 
-            var existingItem = groceryItems.FirstOrDefault(x => x?.ItemName?.ToUpper() == groceryItem?.ItemName?.ToUpper());
+            var existingItem = groceryItems.FirstOrDefault(x => x?.Name?.ToUpper() == groceryItem?.Name?.ToUpper());
 
             if (existingItem != null)
             {
-                existingItem.ItemName = groceryItem.ItemName;
+                existingItem.Name = groceryItem.Name;
                 existingItem.Price = groceryItem.Price;
             }
         }
 
         [HttpPatch(Name = "UpdateProductPrice/{newItemPrice}")]
-        public void Patch(string groceryItemName, int? newItemPrice = null)
+        public void Patch(string groceryItemName, decimal? newItemPrice = null)
         {
             if (groceryItems == null)
             {
                 throw new Exception("No available products");
             }
 
-            var existingItem = groceryItems.FirstOrDefault(x => x?.ItemName?.ToUpper() == groceryItemName?.ToUpper());
+            var existingItem = groceryItems.FirstOrDefault(x => x?.Name?.ToUpper() == groceryItemName?.ToUpper());
 
             if (existingItem != null)
             {
-                existingItem.Price = newItemPrice == null ? existingItem.Price : newItemPrice;
+                existingItem.Price = newItemPrice == null ? existingItem.Price : newItemPrice.Value;
             }
         }
 
@@ -123,7 +123,7 @@ namespace GroceryCartAPI.Controllers
                 throw new Exception("No available products");
             }
 
-            var itemToRemove = groceryItems.SingleOrDefault(x => x?.ItemName?.ToUpper() == groceryItemName?.ToUpper());
+            var itemToRemove = groceryItems.SingleOrDefault(x => x?.Name?.ToUpper() == groceryItemName?.ToUpper());
 
             if (itemToRemove != null)
             {
