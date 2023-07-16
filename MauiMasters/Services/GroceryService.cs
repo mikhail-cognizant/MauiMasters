@@ -1,5 +1,6 @@
 ﻿using Common;
 using MauiMasters.Constants;
+using System.Text;
 using System.Text.Json;
 
 namespace MauiMasters.Services;
@@ -43,5 +44,22 @@ public class GroceryService : IGroceryService
         }
 
         return groceries;
+    }
+
+    public async Task<bool> AddGroceryItem(GroceryItem item)
+    {
+        var itemsToBeAdded = new List<GroceryItemDto>
+        { 
+            item.ToDto()
+        };
+
+        Uri uri = new Uri(groceryRoute);
+
+        string json = JsonSerializer.Serialize(itemsToBeAdded, serializerOptions);
+        StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+
+        var response = await client.PostAsync(uri, content);
+
+        return response.IsSuccessStatusCode;
     }
 }

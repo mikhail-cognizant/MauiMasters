@@ -12,6 +12,18 @@ public partial class GroceryItem : ObservableObject
     [ObservableProperty]
     private int quantity;
 
+    public GroceryItemDto ToDto()
+    {
+        return new GroceryItemDto
+        {
+            Name = Name,
+            Description = Description,
+            ImageUrl = ImageUrl,
+            Price = Price,
+            Quantity = Quantity
+        };
+    }
+
 
     public static GroceryItem FromDto(GroceryItemDto dto)
     {

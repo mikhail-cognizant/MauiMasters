@@ -46,7 +46,8 @@
                         <Button Text="+" HeightRequest="50"
                             Command="{Binding IncrementQuantityCommand}"></Button>
                     </HorizontalStackLayout>
-                    <Button Text="Add To Cart" WidthRequest="150" Margin="0,0,10,0"></Button>
+                    <Button Text="Add To Cart" WidthRequest="150" Margin="0,0,10,0"
+                            Command="{Binding AddToCartCommand}"></Button>
                 </FlexLayout>
             </VerticalStackLayout>
         </Border>

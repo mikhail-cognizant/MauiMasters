@@ -5,6 +5,7 @@ namespace GroceryCartAPI.Services;
 public class GroceryCartService : IGroceryCartService
 {
     private static List<GroceryItem> groceryItems = new();
+    private static List<GroceryItem> groceryCart = new();
     private static decimal taxRate = .12M;
 
     public GroceryCartService()
@@ -254,7 +255,7 @@ public class GroceryCartService : IGroceryCartService
 
     public void AddGroceryItems(IEnumerable<GroceryItem> groceries)
     {
-        groceryItems!.AddRange(groceries);
+        groceryCart!.AddRange(groceries);
     }
 
     public void RemoveGroceryItems(IEnumerable<GroceryItem> groceries)

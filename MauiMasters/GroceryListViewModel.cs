@@ -46,6 +46,12 @@ public partial class GroceryListViewModel : ObservableObject
         CalculatePrice();
     }
 
+    [RelayCommand]
+    private async Task AddToCart()
+    {
+        await _groceryService.AddGroceryItem(SelectedGroceryItem);
+    }
+
     private const decimal vatrate = .12M;
     private void CalculatePrice()
     {
