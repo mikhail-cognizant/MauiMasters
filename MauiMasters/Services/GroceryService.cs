@@ -90,6 +90,7 @@ public class GroceryService : IGroceryService
         if (response.IsSuccessStatusCode)
         {
             item.IsAddedToCart = false;
+            item.Quantity = 0; 
         }
 
         return response.IsSuccessStatusCode;

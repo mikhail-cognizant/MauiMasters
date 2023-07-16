@@ -72,9 +72,16 @@ public partial class GroceryListViewModel : ObservableObject
         }
         else
         {
-            await _groceryService.DeleteGroceryItem(SelectedGroceryItem);
+            await RemoveFromCart();
         }
         
+        CalculatePrice();
+    }
+
+    [RelayCommand]
+    private async Task RemoveFromCart()
+    {
+        await _groceryService.DeleteGroceryItem(SelectedGroceryItem);
         CalculatePrice();
     }
 

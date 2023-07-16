@@ -285,8 +285,6 @@ public class GroceryCartService : IGroceryCartService
     public CartTotals CalculateTotalPrice()
     {
         var cartTotal = new CartTotals();
-        //var groceryItemQuantities = groceryCart.GroupBy(g => g.Id)
-        //    .ToDictionary(key => key.Key, value => value.Count());
 
         var cartLineItems = groceryCart.Select(g =>
         {

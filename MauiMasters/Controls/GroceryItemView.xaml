@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MauiMasters"
              x:Class="MauiMasters.Controls.GroceryItemView">
     <Grid ColumnDefinitions="40*,30*,30*,50">
         <Image Grid.Column="0" Source="{Binding ImageUrl}" WidthRequest="100"></Image>
@@ -12,6 +13,8 @@
             <Label Text="Price" FontSize="20"></Label>
             <Label Text="{Binding Price}" FontAttributes="Bold"></Label>
         </VerticalStackLayout>
-        <Button Grid.Column="3" Text="X" IsVisible="{Binding IsAddedToCart}" HeightRequest="40" WidthRequest="40"></Button>
+        <Button Grid.Column="3" Text="X" IsVisible="{Binding IsAddedToCart}" HeightRequest="40" WidthRequest="40"
+                Command="{Binding Source={RelativeSource AncestorType={x:Type local:GroceryListViewModel}}, 
+                Path=RemoveFromCartCommand}"></Button>
     </Grid>
 </ContentView>
