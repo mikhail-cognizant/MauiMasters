@@ -16,6 +16,7 @@ public partial class GroceryListViewModel : ObservableObject
 
     public async Task Initialize()
     {
+        Reset();
         var groceryItems = await _groceryService.GetGroceryItems();
         if(groceryItems.Any())
         {
@@ -24,6 +25,13 @@ public partial class GroceryListViewModel : ObservableObject
                 GroceryList.Add(groceryItem);
             }
         }
+    }
+
+    private void Reset()
+    {
+        GroceryList.Clear();
+        SelectedGroceryItem = default;
+        TotalPrice = 0;
     }
 
     public ObservableCollection<GroceryItem> GroceryList { get; set; } = new();
@@ -35,35 +43,46 @@ public partial class GroceryListViewModel : ObservableObject
     private void IncrementQuantity()
     {
         SelectedGroceryItem.Quantity++;
-        CalculatePrice();
     }
 
     [RelayCommand]
     private void DecrementQuantity()
     {
         if (SelectedGroceryItem.Quantity == 0) return;
+
         SelectedGroceryItem.Quantity--;
-        CalculatePrice();
+
+        if (SelectedGroceryItem.Quantity == 0)
+        {
+            if (SelectedGroceryItem.IsAddedToCart)
+            {
+                OnPropertyChanging(nameof(SelectedGroceryItem));
+                SelectedGroceryItem.ActionText = "Remove from Cart";
+                OnPropertyChanged(nameof(SelectedGroceryItem));
+            }
+        };
     }
 
     [RelayCommand]
     private async Task AddToCart()
     {
-        await _groceryService.AddGroceryItem(SelectedGroceryItem);
+        if (SelectedGroceryItem.Quantity > 0)
+        {
+            await _groceryService.AddGroceryItem(SelectedGroceryItem);
+        }
+        else
+        {
+            await _groceryService.DeleteGroceryItem(SelectedGroceryItem);
+        }
+        
+        CalculatePrice();
     }
 
-    private const decimal vatrate = .12M;
     private void CalculatePrice()
     {
-        SubTotal = GroceryList.Sum(g => g.Price * g.Quantity);
-        Vat = SubTotal * vatrate;
-        TotalPrice = SubTotal + Vat;
+        TotalPrice = GroceryList.Sum(g => g.Price * g.Quantity);
     }
 
-    [ObservableProperty]
-    private decimal subTotal;
-    [ObservableProperty]
-    private decimal vat;
     [ObservableProperty]
     private decimal totalPrice;
 }

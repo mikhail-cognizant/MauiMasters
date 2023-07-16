@@ -59,6 +59,38 @@ public class GroceryService : IGroceryService
         StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
 
         var response = await client.PostAsync(uri, content);
+        if (response.IsSuccessStatusCode)
+        {
+            item.IsAddedToCart = true;
+        }
+
+        return response.IsSuccessStatusCode;
+    }
+
+    public async Task<bool> DeleteGroceryItem(GroceryItem item)
+    {
+        var itemsToBeRemoved = new List<GroceryItemDto>
+        {
+            item.ToDto()
+        };
+
+        Uri uri = new Uri(groceryRoute);
+
+        string json = JsonSerializer.Serialize(itemsToBeRemoved, serializerOptions);
+        StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+
+        var request = new HttpRequestMessage
+        {
+            Method = HttpMethod.Delete,
+            RequestUri = uri,
+            Content = content
+        };
+
+        var response = await client.SendAsync(request);
+        if (response.IsSuccessStatusCode)
+        {
+            item.IsAddedToCart = false;
+        }
 
         return response.IsSuccessStatusCode;
     }

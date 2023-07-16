@@ -45,8 +45,9 @@
                         <Button Text="+" HeightRequest="50"
                             Command="{Binding IncrementQuantityCommand}"></Button>
                     </HorizontalStackLayout>
-                    <Button Text="Add To Cart" WidthRequest="150" Margin="0,0,10,0"
-                            Command="{Binding AddToCartCommand}"></Button>
+                    <Button Text="{Binding SelectedGroceryItem.ActionText}" WidthRequest="150" Margin="0,0,10,0"
+                            Command="{Binding AddToCartCommand}">
+                    </Button>
                 </FlexLayout>
             </VerticalStackLayout>
         </Border>
@@ -65,9 +66,13 @@
 
         <!--Cart-->
         <Border Grid.Row="3">
-            <VerticalStackLayout  HorizontalOptions="Center" VerticalOptions="Center">
-                <Button Text="Checkout Cart" WidthRequest="150" Clicked="Button_Clicked"></Button>
-            </VerticalStackLayout>
+            <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="50">
+                <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                    <Label Text="Cart Total:"  FontSize="20"></Label>
+                    <Label Text="{Binding TotalPrice, StringFormat='{0:F2}'}" FontSize="20" FontAttributes="Bold"></Label>
+                </HorizontalStackLayout>
+                <Button Text="Checkout Cart" WidthRequest="150" Clicked="Button_Clicked" />
+            </HorizontalStackLayout>
         </Border>
     </Grid>
 </ContentPage>

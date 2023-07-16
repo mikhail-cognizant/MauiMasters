@@ -256,17 +256,28 @@ public class GroceryCartService : IGroceryCartService
 
     public void AddGroceryItems(IEnumerable<GroceryItem> groceries)
     {
-        groceryCart!.AddRange(groceries);
+        foreach (var groceryItem in groceries)
+        {
+            if (!groceryCart.Any(g => g.Id == groceryItem.Id))
+            {
+                groceryCart.Add(groceryItem);
+            }
+            else
+            { 
+                var existingItem = groceryCart.First(g => g.Id == groceryItem.Id);
+                existingItem.Quantity = groceryItem.Quantity;
+            }
+        }
     }
 
     public void RemoveGroceryItems(IEnumerable<GroceryItem> groceries)
     {
         foreach (var groceryItem in groceries)
         {
-            var item = groceryItems!.FirstOrDefault(g => g.Id == groceryItem.Id);
+            var item = groceryCart!.FirstOrDefault(g => g.Id == groceryItem.Id);
             if (item is not null)
             {
-                groceryItems!.Remove(item);
+                groceryCart!.Remove(item);
             }
         }
     }

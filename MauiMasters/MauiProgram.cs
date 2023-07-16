@@ -22,12 +22,12 @@ public static class MauiProgram
 		builder.Logging.AddDebug();
 #endif
 
-        builder.Services.AddSingleton<IGroceryService, GroceryService>();
-        builder.Services.AddSingleton<GroceryList>();
-        builder.Services.AddSingleton<GroceryListViewModel>();
-        builder.Services.AddSingleton<CheckoutCart>();
-        builder.Services.AddSingleton<CheckoutCartViewModel>();
-        builder.Services.AddSingleton<ThankYou>();
+        builder.Services.AddTransient<IGroceryService, GroceryService>();
+        builder.Services.AddTransient<GroceryList>();
+        builder.Services.AddTransient<GroceryListViewModel>();
+        builder.Services.AddTransient<CheckoutCart>();
+        builder.Services.AddTransient<CheckoutCartViewModel>();
+        builder.Services.AddTransient<ThankYou>();
 
         return builder.Build();
 	}
