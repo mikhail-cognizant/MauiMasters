@@ -85,9 +85,10 @@ public partial class GroceryListViewModel : ObservableObject
         CalculatePrice();
     }
 
+    private static decimal taxRate = .12M;
     private void CalculatePrice()
     {
-        TotalPrice = GroceryList.Sum(g => g.Price * g.Quantity);
+        TotalPrice = GroceryList.Sum(g => (g.Price + (g.Price * taxRate)) * g.Quantity);
     }
 
     [ObservableProperty]
