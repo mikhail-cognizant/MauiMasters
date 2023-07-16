@@ -32,20 +32,17 @@ public partial class GroceryListViewModel : ObservableObject
     private GroceryItem? selectedGroceryItem;
 
     [RelayCommand]
-    private void IncrementQuantity(GroceryItem groceryItem)
+    private void IncrementQuantity()
     {
-        SelectedGroceryItem = groceryItem;
-        groceryItem.Quantity++;
+        SelectedGroceryItem.Quantity++;
         CalculatePrice();
     }
 
     [RelayCommand]
-    private void DecrementQuantity(GroceryItem groceryItem)
+    private void DecrementQuantity()
     {
-        SelectedGroceryItem = groceryItem;
-
-        if (groceryItem.Quantity == 0) return;
-        groceryItem.Quantity--;
+        if (SelectedGroceryItem.Quantity == 0) return;
+        SelectedGroceryItem.Quantity--;
         CalculatePrice();
     }
 

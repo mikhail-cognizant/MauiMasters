@@ -20,7 +20,8 @@ public partial class GroceryItem : ObservableObject
             Name = dto.Name,
             Description = dto.Description,
             ImageUrl = dto.ImageUrl,
-            Price = dto.Price
+            Price = dto.Price,
+            Quantity = dto.Quantity
         };
     }
 }

@@ -1,134 +1,48 @@
-﻿using GroceryCartAPI.Models;
-using Microsoft.AspNetCore.Http;
+﻿using Common;
+using GroceryCartAPI.Models;
+using GroceryCartAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GroceryCartAPI.Controllers
+namespace GroceryCartAPI.Controllers;
+
+[Route("api/[controller]")]
+[ApiController]
+public class GroceryCartController : Controller
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class GroceryCartController : Controller
+    private readonly IGroceryCartService _service;
+
+    public GroceryCartController(IGroceryCartService service)
     {
-        private static List<GroceryItem>? groceryItems;
+        _service = service;
+    }
 
-        public GroceryCartController()
-        {
-            InitializeList();
-        }
+    [HttpGet(Name = "GetAllProducts")]
+    public IEnumerable<GroceryItemDto> GetAllProducts()
+    {
+        return _service.GetAllProducts().Select(p => p.ToDto());
+    }
 
-        private void InitializeList()
-        {
-            //if (groceryItems == null) 
-            //{
-            //    groceryItems = new List<GroceryItem>()
-            //    {
-            //        new GroceryItem()
-            //        {
-            //            ItemName = "Banana",
-            //            Price = 15
-            //        },
-            //        new GroceryItem()
-            //        {
-            //            ItemName = "Pear",
-            //            Price = 50
-            //        },
-            //        new GroceryItem()
-            //        {
-            //            ItemName = "Apple",
-            //            Price = 35
-            //        }
-            //    };
-            //}
-        }
+    [HttpGet("{productId}")]
+    public GroceryItemDto GetProductById(int productId)
+    {
+        return _service.GetProductById(productId).ToDto();
+    }
 
-        //[HttpGet(Name = "GetAvailableProducts")]
-        //public IEnumerable<GroceryItem> Get()
-        //{
-        //    return groceryItems ?? new List<GroceryItem>();
-        //}
+    [HttpPost(Name = "Add Products")]
+    public void AddProducts([FromBody]IEnumerable<GroceryItemDto> products)
+    {
+        _service.AddGroceryItems(products.Select(p => GroceryItem.FromDto(p)));
+    }
 
-        [HttpGet(Name = "GetProductByName")]
-        public GroceryItem Get(string itemName)
-        {
-            if (groceryItems == null)
-            {
-                throw new KeyNotFoundException("Product not found");
-            }
+    [HttpDelete(Name = "Remove Products")]
+    public void RemoveProducts([FromBody] IEnumerable<GroceryItemDto> products)
+    {
+        _service.RemoveGroceryItems(products.Select(p => GroceryItem.FromDto(p)));
+    }
 
-            var existingItem = groceryItems.FirstOrDefault(x => x.Name == itemName);
-
-            if (existingItem != null) 
-            {
-                return existingItem;
-            }
-            else
-            {
-                throw new KeyNotFoundException("Product not found");
-            }
-        }
-
-        [HttpPost(Name = "AddProduct")]
-        public void Post(GroceryItem groceryItem) 
-        {
-            if (groceryItems == null)
-            {
-                groceryItems = new List<GroceryItem>();
-            }
-
-            if (groceryItems.Any(x => x?.Name?.ToUpper() == groceryItem?.Name?.ToUpper()))
-            {
-                throw new BadHttpRequestException("Item already exists");
-            }
-
-            groceryItems.Add(groceryItem);
-        }
-
-        [HttpPut(Name = "UpdateProduct")]
-        public void Put(GroceryItem groceryItem)
-        {
-            if (groceryItems == null)
-            {
-                throw new Exception("no available products");
-            }
-
-            var existingItem = groceryItems.FirstOrDefault(x => x?.Name?.ToUpper() == groceryItem?.Name?.ToUpper());
-
-            if (existingItem != null)
-            {
-                existingItem.Name = groceryItem.Name;
-                existingItem.Price = groceryItem.Price;
-            }
-        }
-
-        [HttpPatch(Name = "UpdateProductPrice/{newItemPrice}")]
-        public void Patch(string groceryItemName, decimal? newItemPrice = null)
-        {
-            if (groceryItems == null)
-            {
-                throw new Exception("No available products");
-            }
-
-            var existingItem = groceryItems.FirstOrDefault(x => x?.Name?.ToUpper() == groceryItemName?.ToUpper());
-
-            if (existingItem != null)
-            {
-                existingItem.Price = newItemPrice == null ? existingItem.Price : newItemPrice.Value;
-            }
-        }
-
-        [HttpDelete(Name = "DeleteItem")]
-        public void Delete(string groceryItemName)
-        {
-            if (groceryItems == null)
-            {
-                throw new Exception("No available products");
-            }
-
-            var itemToRemove = groceryItems.SingleOrDefault(x => x?.Name?.ToUpper() == groceryItemName?.ToUpper());
-
-            if (itemToRemove != null)
-            {
-                groceryItems.Remove(itemToRemove);
-            }
-        }
+    [HttpPost("CalculateTotalPrice")]
+    public CartTotals GetCartTotal([FromBody]IEnumerable<GroceryItemDto> groceryList)
+    {
+        return _service.CalculateTotalPrice(groceryList.Select(p => GroceryItem.FromDto(p)));
     }
 }

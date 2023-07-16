@@ -2,23 +2,15 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiMasters.Controls.GroceryItemView">
-    <Grid ColumnDefinitions="65*,35*">
-        <HorizontalStackLayout Spacing="5" VerticalOptions="Center">
-            <Image Source="{Binding ImageUrl}" WidthRequest="50"></Image>
-            <VerticalStackLayout>
-                <Label Text="{Binding Name}"></Label>
-                <Label Text="{Binding Description}"></Label>
-                <Label Text="{Binding Price}"></Label>
-            </VerticalStackLayout>
-        </HorizontalStackLayout>
-        <HorizontalStackLayout Grid.Column="1" Spacing="10" VerticalOptions="Center">
-            <Button Text="-" HeightRequest="50"></Button>
-            <!--Command="{Binding Source={x:Reference this}, Path=BindingContext.DecrementQuantityCommand}" 
-                    CommandParameter="{Binding}"></Button>-->
-            <Label Text="{Binding Quantity}" FontAttributes="Bold" FontSize="20" Margin="0,10,0,0"></Label>
-            <Button Text="+" HeightRequest="50"></Button>
-            <!--Command="{Binding Source={x:Reference this}, Path=BindingContext.IncrementQuantityCommand}" 
-                    CommandParameter="{Binding}"></Button>-->
-        </HorizontalStackLayout>
+    <Grid ColumnDefinitions="40*,30*,30*">
+        <Image Grid.Column="0" Source="{Binding ImageUrl}" WidthRequest="100"></Image>
+        <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center">
+            <Label Text="{Binding Name}" FontSize="20"></Label>
+            <Label Text="{Binding Description}"></Label>
+        </VerticalStackLayout>
+        <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center">
+            <Label Text="Price" FontSize="20"></Label>
+            <Label Text="{Binding Price}" FontAttributes="Bold"></Label>
+        </VerticalStackLayout>     
     </Grid>
 </ContentView>

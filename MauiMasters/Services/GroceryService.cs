@@ -10,8 +10,8 @@ public class GroceryService : IGroceryService
     private JsonSerializerOptions serializerOptions;
 
     private string groceryRoute = DeviceInfo.Platform == DevicePlatform.Android
-            ? $"{GroceryAPIConsts.GroceryAPIURLDroid}Grocery"
-            : $"{GroceryAPIConsts.GroceryAPIURL}Grocery";
+            ? $"{GroceryAPIConsts.GroceryAPIURLDroid}GroceryCart"
+            : $"{GroceryAPIConsts.GroceryAPIURL}GroceryCart";
 
     public GroceryService()
     {
