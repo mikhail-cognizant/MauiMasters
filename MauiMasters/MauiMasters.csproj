@@ -51,10 +51,16 @@
 	<ItemGroup>
 	  <None Remove="Resources\Images\apple.jpg" />
 	  <None Remove="Resources\Images\banana.jpg" />
+	  <None Remove="Resources\Images\cherry.jpg" />
+	  <None Remove="Resources\Images\fig.jpg" />
 	  <None Remove="Resources\Images\grapes.jpg" />
 	  <None Remove="Resources\Images\melon.jpg" />
 	  <None Remove="Resources\Images\orange.jpg" />
+	  <None Remove="Resources\Images\peach.png" />
+	  <None Remove="Resources\Images\pear.jpg" />
+	  <None Remove="Resources\Images\plum.jpg" />
 	  <None Remove="Resources\Images\strawberry.jpg" />
+	  <None Remove="Resources\Images\watermelon.jpg" />
 	</ItemGroup>
 
 	<ItemGroup>
