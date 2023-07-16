@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Maui;
+using MauiMasters.Services;
 using Microsoft.Extensions.Logging;
 
 namespace MauiMasters;
@@ -21,6 +22,10 @@ public static class MauiProgram
 		builder.Logging.AddDebug();
 #endif
 
-		return builder.Build();
+		builder.Services.AddSingleton<GroceryList>();
+        builder.Services.AddSingleton<GroceryListViewModel>();
+        builder.Services.AddSingleton<IGroceryService, GroceryService>();
+
+        return builder.Build();
 	}
 }
