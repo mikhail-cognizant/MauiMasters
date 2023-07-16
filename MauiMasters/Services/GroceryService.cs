@@ -78,4 +78,12 @@ public class GroceryService : IGroceryService
 
         return total;
     }
+
+    public async Task<bool> ClearCart()
+    {
+        Uri uri = new Uri(groceryRoute + "/clearcart");
+
+        HttpResponseMessage response = await client.DeleteAsync(uri);
+        return response.IsSuccessStatusCode;
+    }
 }

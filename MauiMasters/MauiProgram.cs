@@ -27,6 +27,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<GroceryListViewModel>();
         builder.Services.AddSingleton<CheckoutCart>();
         builder.Services.AddSingleton<CheckoutCartViewModel>();
+        builder.Services.AddSingleton<ThankYou>();
 
         return builder.Build();
 	}

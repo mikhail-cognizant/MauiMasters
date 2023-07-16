@@ -6,44 +6,55 @@
              x:Class="MauiMasters.CheckoutCart"
              x:DataType="local:CheckoutCartViewModel"
              Title="CheckoutCart">
-    <VerticalStackLayout Spacing="5" Padding="15">
-        <Label Text="Cart Summary" FontSize="20" FontAttributes="Bold"></Label>        
+    <Grid RowDefinitions="*, 70">
+        <VerticalStackLayout Spacing="5" Padding="15">
+            <Label Text="Cart Summary" FontSize="20" FontAttributes="Bold"></Label>
 
-        <Grid ColumnDefinitions="60*,20*,20*">
-            <Label Text="Item"></Label>
-            <Label Grid.Column="1" Text="Quantity"></Label>
-            <Label Grid.Column="2" Text="Total" HorizontalOptions="End"></Label>
-        </Grid>
+            <Grid ColumnDefinitions="60*,20*,20*">
+                <Label Text="Item"></Label>
+                <Label Grid.Column="1" Text="Quantity"></Label>
+                <Label Grid.Column="2" Text="Total" HorizontalOptions="End"></Label>
+            </Grid>
 
-        <BoxView HeightRequest="2"></BoxView>
+            <BoxView HeightRequest="2"></BoxView>
 
-        <VerticalStackLayout BindableLayout.ItemsSource="{Binding CartSummary.Items}" >
-            <BindableLayout.ItemTemplate>
-                <DataTemplate x:DataType="common:CartLineItem">
-                    <Grid ColumnDefinitions="60*,20*,20*">
-                        <Label Grid.Column="0" Text="{Binding GroceryItem.Name}"></Label>
-                        <Label Grid.Column="1" Text="{Binding Quantity}"></Label>
-                        <Label Grid.Column="2" Text="{Binding Price, StringFormat='{0:F2}'}" 
+            <VerticalStackLayout BindableLayout.ItemsSource="{Binding CartSummary.Items}" >
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="common:CartLineItem">
+                        <Grid ColumnDefinitions="60*,20*,20*">
+                            <Label Grid.Column="0" Text="{Binding GroceryItem.Name}"></Label>
+                            <Label Grid.Column="1" Text="{Binding Quantity}"></Label>
+                            <Label Grid.Column="2" Text="{Binding Price, StringFormat='{0:F2}'}" 
                            FontAttributes="Bold" HorizontalOptions="End"></Label>
-                    </Grid>
-                </DataTemplate>
-            </BindableLayout.ItemTemplate>
+                        </Grid>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </VerticalStackLayout>
+
+            <BoxView HeightRequest="2"></BoxView>
+
+            <Grid ColumnDefinitions="60*,20*,20*" RowDefinitions="*,*,*">
+                <Label Grid.Row="0" Grid.Column="1" Text="Sub Total:"></Label>
+                <Label Grid.Row="0" Grid.Column="2" Text="{Binding CartSummary.SubTotal, StringFormat='{0:F2}'}" 
+                           FontAttributes="Bold" HorizontalOptions="End"></Label>
+
+                <Label Grid.Row="1" Grid.Column="1" Text="VAT:"></Label>
+                <Label Grid.Row="1" Grid.Column="2"  Text="{Binding CartSummary.VatTotal, StringFormat='{0:F2}'}" 
+                           FontAttributes="Bold" HorizontalOptions="End"></Label>
+
+                <Label Grid.Row="2" Grid.Column="1" Text="Total:"></Label>
+                <Label Grid.Row="2" Grid.Column="2" Text="{Binding CartSummary.TotalPrice, StringFormat='{0:F2}'}" 
+                           FontAttributes="Bold" HorizontalOptions="End"></Label>
+            </Grid>
+
+            
         </VerticalStackLayout>
-        
-        <BoxView HeightRequest="2"></BoxView>
 
-        <Grid ColumnDefinitions="60*,20*,20*" RowDefinitions="*,*,*">
-            <Label Grid.Row="0" Grid.Column="1" Text="Sub Total:"></Label>
-            <Label Grid.Row="0" Grid.Column="2" Text="{Binding CartSummary.SubTotal, StringFormat='{0:F2}'}" 
-                           FontAttributes="Bold" HorizontalOptions="End"></Label>
-            
-            <Label Grid.Row="1" Grid.Column="1" Text="VAT:"></Label>
-            <Label Grid.Row="1" Grid.Column="2"  Text="{Binding CartSummary.VatTotal, StringFormat='{0:F2}'}" 
-                           FontAttributes="Bold" HorizontalOptions="End"></Label>
-            
-            <Label Grid.Row="2" Grid.Column="1" Text="Total:"></Label>
-            <Label Grid.Row="2" Grid.Column="2" Text="{Binding CartSummary.TotalPrice, StringFormat='{0:F2}'}" 
-                           FontAttributes="Bold" HorizontalOptions="End"></Label>
-        </Grid>
-    </VerticalStackLayout>
+        <!--Checkout-->
+        <Border Grid.Row="1">
+            <VerticalStackLayout  HorizontalOptions="Center" VerticalOptions="Center">
+                <Button Text="Checkout" WidthRequest="150" Clicked="Button_Clicked"></Button>
+            </VerticalStackLayout>
+        </Border>
+    </Grid>
 </ContentPage>

@@ -292,4 +292,9 @@ public class GroceryCartService : IGroceryCartService
 
         return cartTotal;
     }
+
+    public void ClearCart()
+    {
+        groceryCart.Clear();
+    }
 }

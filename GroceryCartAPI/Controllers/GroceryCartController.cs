@@ -46,4 +46,11 @@ public class GroceryCartController : Controller
     {
         return _service.CalculateTotalPrice();
     }
+
+    [HttpDelete]
+    [Route("clearcart")]
+    public void ClearCart()
+    {
+        _service.ClearCart();
+    }
 }
